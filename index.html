@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mouse and Turtle Adventure</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            font-family: Arial, sans-serif;
+        }
+        
+        #gameCanvas {
+            border: 3px solid #ffd700;
+            background: linear-gradient(180deg, #87ceeb, #98fb98);
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+        }
+        
+        #gameInfo {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            color: white;
+            font-size: 18px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+        }
+        
+        #controls {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            color: white;
+            font-size: 14px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+        }
+        
+        #levelNavigation {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+        }
+        
+        .level-button {
+            background: linear-gradient(135deg, #8B4513, #A0522D);
+            color: white;
+            border: 2px solid #ffd700;
+            padding: 8px 16px;
+            margin: 5px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+            transition: all 0.3s ease;
+        }
+        
+        .level-button:hover {
+            background: linear-gradient(135deg, #A0522D, #CD853F);
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+            transform: translateY(-2px);
+        }
+        
+        .level-button.active {
+            background: linear-gradient(135deg, #ffd700, #ffed4a);
+            color: #000;
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.8);
+        }
+    </style>
+</head>
+<body>
+    <canvas id="gameCanvas" width="1200" height="600"></canvas>
+    
+    <div id="gameInfo">
+        <div>Mickey Health: <span id="mickeyHealth">100</span></div>
+        <div>Bowser Health: <span id="bowserHealth">100</span></div>
+        <div>Level: <span id="currentLevel">1</span></div>
+    </div>
+    
+    <div id="levelNavigation">
+        <div style="margin-bottom: 10px;"><strong>Level Navigation:</strong></div>
+        <button class="level-button" onclick="jumpToLevel(1)">The Forest Path</button>
+        <button class="level-button" onclick="jumpToLevel(2)">Haunted Mansion</button>
+        <button class="level-button" onclick="jumpToLevel(3)">Beach of Doom</button>
+    </div>
+    
+    <div id="controls">
+        <div><strong>Mickey Controls:</strong> WASD (W=Jump, A/D=Move, S=Throw Paintball)</div>
+        <div><strong>Bowser Controls:</strong> Arrow Keys (Up=Jump, Left/Right=Move, Down=Fire Attack)</div>
+    </div>
+    
+    <script src="game.js"></script>
+</body>
+</html>
