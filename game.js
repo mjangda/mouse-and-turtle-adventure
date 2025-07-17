@@ -153,7 +153,7 @@ class Game {
                 } else if (item.type === 'portal') {
                     if (mickeyTouching && bowserTouching) {
                         this.nextLevel();
-                        this.items.splice(index, 1);
+                        return;
                     } else {
                         item.bothNeeded = true;
                     }
