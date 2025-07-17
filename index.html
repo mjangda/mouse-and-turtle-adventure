@@ -72,9 +72,126 @@
             color: #000;
             box-shadow: 0 0 15px rgba(255, 215, 0, 0.8);
         }
+        
+        #splashScreen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            color: white;
+            text-align: center;
+        }
+        
+        #splashScreen.hidden {
+            display: none;
+        }
+        
+        .game-title {
+            font-size: 4rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.8);
+            background: linear-gradient(45deg, #ffd700, #ff6b6b, #4ecdc4, #45b7d1);
+            background-size: 400% 400%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradient 3s ease infinite;
+        }
+        
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .game-subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            color: #b0b0b0;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+        }
+        
+        .menu-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            margin-top: 2rem;
+        }
+        
+        .menu-button {
+            background: linear-gradient(135deg, #8B4513, #A0522D);
+            color: white;
+            border: 3px solid #ffd700;
+            padding: 15px 40px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            border-radius: 15px;
+            cursor: pointer;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+            transition: all 0.3s ease;
+            min-width: 200px;
+            pointer-events: auto;
+            position: relative;
+            z-index: 1001;
+        }
+        
+        .menu-button:hover {
+            background: linear-gradient(135deg, #A0522D, #CD853F);
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.6);
+            transform: translateY(-3px) scale(1.05);
+        }
+        
+        .adventure-scene {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.7;
+            background: url('adventure-background.jpg') no-repeat center center;
+            background-size: cover;
+        }
+        
+        .text-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            z-index: 1;
+        }
     </style>
 </head>
 <body>
+    <div id="splashScreen">
+        <div class="adventure-scene"></div>
+        <div class="text-overlay"></div>
+        
+        <h1 class="game-title">Mouse & Turtle Adventure</h1>
+        <p class="game-subtitle">Join Mickey and Bowser on their quest for the Golden Cup of Infinity!</p>
+        
+        <div class="menu-buttons">
+            <button id="playButton" class="menu-button">🎮 Play Game</button>
+            <button id="instructionsButton" class="menu-button">📖 Instructions</button>
+        </div>
+        
+        <div id="instructions" style="display: none; margin-top: 2rem; max-width: 600px; background: rgba(0,0,0,0.7); padding: 20px; border-radius: 15px;">
+            <h3>How to Play:</h3>
+            <p><strong>Mickey Controls:</strong> WASD (W=Jump, A/D=Move, S=Throw Paintball)</p>
+            <p><strong>Bowser Controls:</strong> Arrow Keys (Up=Jump, Left/Right=Move, Down=Fire Attack)</p>
+            <p><strong>Goal:</strong> Work together to reach portals and find the Golden Cup!</p>
+            <button class="menu-button" onclick="hideInstructions()" style="margin-top: 15px; font-size: 1rem; padding: 10px 20px;">Back to Menu</button>
+        </div>
+    </div>
+
     <canvas id="gameCanvas" width="1200" height="600"></canvas>
     
     <div id="gameInfo">
@@ -95,6 +212,52 @@
         <div><strong>Bowser Controls:</strong> Arrow Keys (Up=Jump, Left/Right=Move, Down=Fire Attack)</div>
     </div>
     
+    <script>
+        // Test if JavaScript is working at all
+        console.log('JavaScript is loading');
+        
+        // Wait for DOM to be ready
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('DOM loaded, setting up event listeners');
+            
+            // Get button elements
+            const playButton = document.getElementById('playButton');
+            const instructionsButton = document.getElementById('instructionsButton');
+            
+            console.log('Play button found:', !!playButton);
+            console.log('Instructions button found:', !!instructionsButton);
+            
+            // Add event listeners
+            if (playButton) {
+                playButton.addEventListener('click', function() {
+                    console.log('Starting game...');
+                    document.getElementById('splashScreen').style.display = 'none';
+                    console.log('Splash screen hidden, game should be playable');
+                });
+                console.log('Play button listener added');
+            }
+            
+            if (instructionsButton) {
+                instructionsButton.addEventListener('click', function() {
+                    console.log('Showing instructions...');
+                    document.getElementById('instructions').style.display = 'block';
+                });
+                console.log('Instructions button listener added');
+            }
+        });
+        
+        // Legacy functions for other buttons
+        function hideInstructions() {
+            console.log('Hiding instructions...');
+            document.getElementById('instructions').style.display = 'none';
+        }
+        
+        function jumpToLevel(level) {
+            console.log('Jump to level:', level);
+        }
+        
+        console.log('Functions defined');
+    </script>
     <script src="game.js"></script>
 </body>
 </html>
